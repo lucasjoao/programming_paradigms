@@ -1,0 +1,20 @@
+##### Relatório 02 - Estrutura das linguagens #####
+##### Lucas João Martins                      #####
+
+##### Parte 1                                 #####
+
+  Antes de explicar o que é um analisador léxico e um parser, vale citar que
+ambos costumam trabalhar em conjunto para analisar a sintaxe e a semântica das
+linguagens de programação. Esse trabalho ocorre na transformação da linguagem de
+alto nível para a linguagem de baixo nível (código binário).
+  O analisador léxico, também conhecido como lexer, converte uma sequência de
+caracteres em uma sequência de tokens. De maneira simplificada, um token é uma
+string identificada com um "significado". Enquanto isso, o parser converte uma
+lista de tokens em uma estrutura de dados (e.g. uma árvore de parse) que fornece
+uma representação estrutural dos tokens.
+  Alguns analisadores léxicos são:
+- the fast lexical analyzer generator (flex): software que gera scanners, ou
+seja, programas que reconhecem padrões léxicos no código-fonte, ou seja,
+verifica se o vocabulário está de acordo com os padrões definidos pela
+linguagem.
+
