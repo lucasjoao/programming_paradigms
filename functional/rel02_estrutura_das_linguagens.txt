@@ -9,12 +9,30 @@ linguagens de programação. Esse trabalho ocorre na transformação da linguage
 alto nível para a linguagem de baixo nível (código binário).
   O analisador léxico, também conhecido como lexer, converte uma sequência de
 caracteres em uma sequência de tokens. De maneira simplificada, um token é uma
-string identificada com um "significado". Enquanto isso, o parser converte uma
-lista de tokens em uma estrutura de dados (e.g. uma árvore de parse) que fornece
-uma representação estrutural dos tokens.
+string identificada com um "significado". Enquanto isso, o analisador sintático,
+que pode ser chamador de parser, converte uma lista de tokens em uma estrutura
+de dados (e.g. uma árvore de parse) que fornece uma representação estrutural dos
+tokens.
   Alguns analisadores léxicos são:
-- the fast lexical analyzer generator (flex): software que gera scanners, ou
-seja, programas que reconhecem padrões léxicos no código-fonte, ou seja,
-verifica se o vocabulário está de acordo com os padrões definidos pela
-linguagem.
+- lex: software desenvolvido por volta de 1975 por Mike Lesk e Eric Schmidt. Sua
+finalidade é gerar scanners, onde scanners são programas que reconhecem padrões
+léxicos no código-fonte, ou seja, verificam se o vocabulário está de acordo com
+os padrões definidos pela linguagem. No começo foi distribuído como software
+privado. - the fast lexical analyzer generator (flex): software desenvolvido por
+volta de 1987 por Vern Paxson na linguagem C como uma alternativa para o lex.
+Possui a mesma finalidade do lex, ou seja, gerar scanners para arquivos de
+entrada. Apesar de possuir código aberto e ser open-source, o flex não faz parte
+do projeto GNU.
+  Enquanto alguns analisadores sintáticos são:
+- yet another compiler-compiler (yacc): desenvolvido no começo da década de 70
+por Stephen C. Johnson na linguagem B, para depois ser reescrito em C. Trata-se
+de um parser Look Ahead Left-Right (LALR) baseado na notação de Backus-Naur, ou
+seja, de maneira simplificada ele converte uma gramática livre-de-contexto para
+um conjunto de tabelas. No começo foi distribuído como software privado. -
+bison: desenvolvido inicialmente em 1988 por Robert Corbett para depois
+tornar-se compatível com o yacc por Richard Stallman. Possui o mesmo estilo do
+yacc, sendo que os arquivos de entrada devem possuir a mesma convenção, por
+outro lado, o bison pode ser considerado um parser LALR e GLR. Além disso, ele é
+um software livre que faz parte do projeto GNU.
 
+##### Parte 2                                 #####
