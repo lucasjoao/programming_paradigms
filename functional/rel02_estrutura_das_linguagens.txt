@@ -18,7 +18,8 @@ tokens.
 finalidade é gerar scanners, onde scanners são programas que reconhecem padrões
 léxicos no código-fonte, ou seja, verificam se o vocabulário está de acordo com
 os padrões definidos pela linguagem. No começo foi distribuído como software
-privado. - the fast lexical analyzer generator (flex): software desenvolvido por
+privado.
+- the fast lexical analyzer generator (flex): software desenvolvido por
 volta de 1987 por Vern Paxson na linguagem C como uma alternativa para o lex.
 Possui a mesma finalidade do lex, ou seja, gerar scanners para arquivos de
 entrada. Apesar de possuir código aberto e ser open-source, o flex não faz parte
@@ -28,11 +29,28 @@ do projeto GNU.
 por Stephen C. Johnson na linguagem B, para depois ser reescrito em C. Trata-se
 de um parser Look Ahead Left-Right (LALR) baseado na notação de Backus-Naur, ou
 seja, de maneira simplificada ele converte uma gramática livre-de-contexto para
-um conjunto de tabelas. No começo foi distribuído como software privado. -
-bison: desenvolvido inicialmente em 1988 por Robert Corbett para depois
+um conjunto de tabelas. No começo foi distribuído como software privado.
+- bison: desenvolvido inicialmente em 1988 por Robert Corbett para depois
 tornar-se compatível com o yacc por Richard Stallman. Possui o mesmo estilo do
 yacc, sendo que os arquivos de entrada devem possuir a mesma convenção, por
 outro lado, o bison pode ser considerado um parser LALR e GLR. Além disso, ele é
 um software livre que faz parte do projeto GNU.
 
 ##### Parte 2                                 #####
+
+  Arquivos *.l, mais precisamente o scan.l fornecido:
+- arquivo associado ao lex/flex que define a estrutura léxica do programa. Ele é
+dividido em três partes por '%%', sendo que a primeira parte é para definição,
+a segunda para regras e a terceira para código em C.
+  - definição: o alfabeto é definido, além disso há a inclusão do padrão
+  standard do C e do outro arquivo fornecido ('y.tab.h'), que foi gerado por um
+  analisador sintático.
+  - regras: associa o alfabeto com os tipos definidos.
+  - código em C: define como o programa deve se comportar.
+  Arquivos *.y, mais precisamente o gram.y fornecido:
+- arquivos associado ao yacc/bison que analisa sintaticamente os arquivos de
+entrada. Ele também é dividido em três partes por '%%', sendo que a primeira
+parte é para tokens, a segunda para sintaxe e a terceira para código em C.
+  - tokens: os tipos presentes na linguagem.
+  - sintaxe: como deve ser a "forma" das expressões na linguagem.
+  - código em C: define como o programa deve se comportar.
