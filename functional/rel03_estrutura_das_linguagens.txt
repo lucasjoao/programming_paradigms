@@ -1,1 +1,40 @@
-tmp
+##### Relatório 03 - Estrutura das linguagens                              #####
+##### Lucas João Martins                                                   #####
+
+A linguagem Python suporta o paradigma funcional e o procedural. Nesse trabalho
+serão apresentados três códigos simples de Python que possuem o mesmo objetivo:
+imprimir a soma de todos os inteiros de uma lista já definida. Porém, um código
+será funcional, outro procedural e o último irá misturar os dois paradigmas.
+
+##### func.py (código funcional)                                           #####
+--------------------------------------------------------------------------------
+import functools
+print(functools.reduce(lambda x, y: x + y, [10, 20, 30, 40]))
+--------------------------------------------------------------------------------
+O paradigma funcional aqui é utilizado com o uso da expressão lambda.
+
+##### proc.py (código procedural)                                          #####
+--------------------------------------------------------------------------------
+def sum_list(lst):
+  x = 0
+  for i in range(len(lst)):
+    x += lst[i]
+
+  return x
+
+print(sum_list([10, 20, 30, 40]))
+--------------------------------------------------------------------------------
+O paradigma procedural aqui é feito com o uso do def, que cria uma rotina que
+pode ser invocada posteriormente.
+
+##### func_proc.py (código funcional e procedural)                         #####
+--------------------------------------------------------------------------------
+import functools
+
+def sum_list(lst):
+  return functools.reduce(lambda x, y: x + y, lst)
+
+print(sum_list([10, 20, 30, 40]))
+--------------------------------------------------------------------------------
+O paradigma funcional e procedural aqui são misturados com o uso de uma
+expressão lambda dentro de uma rotina.
