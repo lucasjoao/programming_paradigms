@@ -16,11 +16,11 @@ lingpredecada(Lp, L) :- predecessora(L, Lp), linguagem(L, A), linguagem(Lp, B),
                         X is A - B, X >= 10.
 
 % Questão 5
-lingdecada(L, D) :- true.
+lingdecada(L, D) :- linguagem(L, A),
+                    T is D mod 1900,
+                    U is T mod 10,
+                    D - U =< A,
+                    A =< D - U + 9.
 
 % Questão 6
-lingcommultipre(L) :- predecessora(L, FilhaRaiz), predecessora(L, Raiz),
-                      \+predecessora(Raiz, _), predecessora(FilhaRaiz, Raiz).
-
-
-% aggregate_all(count, predecessora(L, _), Count), Count > 1.
+lingcommultipre(L) :- predecessora(L, A), predecessora(L, B), A \= B.
