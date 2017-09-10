@@ -1,4 +1,22 @@
-intro
+##### Relatório 04 - Cálculo lambda                                        #####
+##### Lucas João Martins                                                   #####
+
+  O cálculo lambda é um formalismo algébrico para representar abstração de
+funções e argumentos na lógica matemática descrito por Alonso Church na década de 30 com
+base na lógica combinatória de Schönfinkel e na teoria da recursividade de
+Stephen Kleene.
+  O cálculo lambda pode ser chamado da menor linguagem de programação universal do mundo. Ele consiste de uma única regra de transformação (substituição de variável) e de um único esquema para definição de função.
+
+
+   It was introduced in the 1930s by Alonzo
+Church as a way of formalizing the concept of effective computability. The λ calculus
+is universal in the sense that any computable function can be expressed and evaluated
+using this formalism. It is thus equivalent to Turing machines. However, the λ calculus
+emphasizes the use of transformation rules and does not care about the actual machine
+implementing them. It is an approach more related to software than to hardware.
+
+
+
 pegar definições e exemplos
 comparar com tradicional
 falar sobre variável e argumento
