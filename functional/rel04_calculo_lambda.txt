@@ -1,25 +1,67 @@
-##### Relatório 04 - Cálculo lambda                                        #####
+##### Relatório 04 - Cálculo-λ                                             #####
 ##### Lucas João Martins                                                   #####
 
-  O cálculo lambda é um formalismo algébrico para representar abstração de
-funções e argumentos na lógica matemática descrito por Alonso Church na década de 30 com
-base na lógica combinatória de Schönfinkel e na teoria da recursividade de
-Stephen Kleene.
-  O cálculo lambda pode ser chamado da menor linguagem de programação universal do mundo. Ele consiste de uma única regra de transformação (substituição de variável) e de um único esquema para definição de função.
+##### Parte 1                                                              #####
 
+  O cálculo-λ é um formalismo algébrico para representar abstração de
+funções e argumentos na lógica matemática descrito por Alonso Church na
+década de 30 com base na lógica combinatória de Schönfinkel e na teoria da
+recursividade de Stephen Kleene.
+  O cálculo-λ pode ser considerado a menor linguagem de programação
+universal do mundo. Ele consiste de uma única regra de transformação
+(substituição de variável) e de um único esquema para definição de função. É
+universal no sentido que qualquer função computável pode ser expressada e
+calculada com esse formalismo. É equivalente a máquina de Turing, mas possui
+um enfoque mais relacionado ao software do que ao hardware.
+  O conceito central no cálculo-λ é o de expressão. Uma variável é um
+identificador que pode ser qualquer qualquer letra do alfabeto. Uma expressão
+é definida de maneira recursiva da seguinte maneira:
+  - <expressão> := <variável> | <função> | <aplicação>
+  - <função> := λ <variável>.<expressão>
+  - <aplicação> := <expressão><expressão>
+  As únicas palavras-chave nessa linguagem são o 'λ', o '.' (ponto) e os '()'
+(parênteses) (opcionais). Alguns exemplos são:
+  - λx.x
+  - λx.x² + xy + z
+  Com os exemplos fica mais fácil perceber a sútil diferença entre variável e
+argumento. Uma variável é todo identificador, ou seja, nos exemplos são as
+letras 'x', 'y' e 'z', enquanto que o argumento é somente um "place holder"
+que será substituído quando a uma expressão for avaliada, ou seja, é apenas a
+letra 'x' nos exemplos.
+  Expressões em cálculo-λ também podem sofrer mudanças de comportamento, o
+que é chamado de redução e pode ser de três tipos:
+  - α−conversão: onde se altera o limite das variáveis. Geralmente pode ser
+  usada para alterar o nome da variável, pois uma expressão é reduzida a outra
+  pela renomeação de um identificador limitado, por qualquer outro identificador
+  que não esteja contido na expressão.
+  - β−redução: onde se aplica funções nos argumentos de uma expressão.
+  - η−conversão: onde dada duas funções notadas de forma diferente, só
+  serão iguais se, e somente se, elas dão o mesmo resultado para todos os
+  argumentos definidos para a mesma entrada.
 
-   It was introduced in the 1930s by Alonzo
-Church as a way of formalizing the concept of effective computability. The λ calculus
-is universal in the sense that any computable function can be expressed and evaluated
-using this formalism. It is thus equivalent to Turing machines. However, the λ calculus
-emphasizes the use of transformation rules and does not care about the actual machine
-implementing them. It is an approach more related to software than to hardware.
+##### Parte 2                                                              #####
 
+  Conforme solicitado, segue o resultado de algumas experimentações realizadas
+no interpretador GHCi da linguagem Haskell, que por sua vez é baseada em
+cálculo-λ.
+    Prelude> let quad = \x->x*x
+    Prelude> quad 10
+    100
+    Prelude> map(quad)[1..10]
+    [1,4,9,16,25,36,49,64,81,100]
+  Usando uma expressão λ remova da lista [5..10] primeiro elemento que casa
+com a declaração “divisı́vel por 3”:
+    Prelude> Data.List.deleteBy (\x y -> y `mod` x == 0) 3 [5..10]
+    [5,7,8,9,10]
+  Usando uma expressão λ remova da lista [4..19] todos os elementos não
+divisı́veis por 4:
+    Prelude> Data.List.filter (\x -> x `mod` 4 == 0) [4..19]
+    [4,8,12,16]
+  Qual o valor da expressão: [x | x <- [1..4], y <- [x..5], (x+y) `mod` 2 == 0]
+    Prelude> [x | x <- [1..4], y <- [x..5], (x+y) `mod` 2 == 0]
+    [1,1,1,2,2,3,3,4]
 
-
-pegar definições e exemplos
-comparar com tradicional
-falar sobre variável e argumento
-pegar tipos de redução
-experimentações
-parte 2
+##### Referências                                                          #####
+- http://www.inf.fu-berlin.de/lehre/WS03/alpi/lambda.pdf
+- https://en.wikipedia.org/wiki/Lambda_calculus
+- slide disponibilizado pelo professor
