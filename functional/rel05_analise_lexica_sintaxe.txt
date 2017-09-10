@@ -1,1 +1,20 @@
-seguir passo a passo do moodle
+##### Relatório 05 - Análise léxica: sintaxe                               #####
+##### Lucas João Martins                                                   #####
+
+  Paul Raymond Hudak (15 de Julho de 1952 – 29 de Abril de 2015) foi um
+professor americano do curso de ciência da computação na universidade Yale. Ele
+foi um dos criadores da linguagem funcional Haskell. Sua pesquisa tinha foco em
+linguagens de programação e em música computacional. Um amante de esportes,
+infelizmente em 2009 foi diagnosticado com leucemia e após uma longa batalha
+contra a doença faleceu em 2015.
+  Hudak foi um dos escritores do 'A Gentle Introduction to Haskell'. Trata-se de
+um tutorial que não possui como objetivo ensinar programação, nem ensinar
+programação funcional, mas sim ser uma introdução mais amigável ao Haskell
+para uma pessoa que já possui experiência com outra linguagem de programação,
+preferencialmente uma linguagem de programação classificada como funcional.
+
+##### Referências                                                          #####
+  - https://www.haskell.org/tutorial/
+  - https://en.wikipedia.org/wiki/Paul_Hudak
+  - http://haskell.cs.yale.edu/people/paul-hudak/personal/
+  - https://news.yale.edu/2015/04/30/memoriam-paul-hudak-computer-scientist-and-saybrook-college-master
