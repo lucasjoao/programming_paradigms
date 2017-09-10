@@ -1,0 +1,7 @@
+intro
+pegar definições e exemplos
+comparar com tradicional
+falar sobre variável e argumento
+pegar tipos de redução
+experimentações
+parte 2
