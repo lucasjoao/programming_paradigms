@@ -1,0 +1,120 @@
+##### Relatório 06 - Classes e tipos                                       #####
+##### Lucas João Martins                                                   #####
+
+##### Parte 1                                                              #####
+
+  Em linguagens de programação, polimorfismo (que vem do grego "muitas formas")
+é o fornecimento de uma única interface para diferentes tipos de entidades. Há
+diferentes tipos de polimorfismos, como:
+  - polimorfismo ad hoc: quando uma função apresenta diferentes implementações
+heterogêneas conforme variações nos seus tipos. Geralmente é implementado com
+sobrecarga de método (assinaturas iguais, mas comportamentos diferentes) nas
+linguagens.
+  - polimorfismo paramétrico: quando uma função não possui um tipo especificado
+e por isso pode ser utilizado transparentemente com qualquer tipo de dado.
+  Em Java e C++, o polimorfismo ad hoc funciona através da sobrecarga de métodos
+da seguinte maneira. Um exemplo em Java seria:
+
+    public int subtract(int a, int b) {
+      return a - b;
+    }
+
+    public float subtract(float a, float b) {
+      return a - b;
+    }
+
+  Enquanto que o polimorfismo paramétrico ocorre através do uso de templates, ou
+seja, de programação genérica. Um exemplo disso em Java é:
+
+    public<T> void printArray(T[] inputArray) {
+      for(E element : inputArray) {
+         System.out.prinln("%s ", element);
+      }
+    }
+
+  Por outor lado, Haskell implementa o polimorfismo ad hoc através do sistema de
+tipos de classes e das instâncias de classes. Aqui a sobrecarga de métodos não
+é limitada somente às funções. Um exemplo seria:
+
+    elem :: (Eq a) => a -> [a] --> Bool
+
+  E o polimorfismo paramétrico é alcançado da seguinte maneira em Haskell:
+
+    id :: a -> a
+
+  Já Python, por ser uma linguagem dinamicamente tipada, o conceito de
+polimorfismo passa a ser um pouco nebuloso e por isso não muito bem definido
+como deve ser a implementação.
+  As classes em C++ servem para implementar interfaces e especificar métodos, já
+em Haskell elas são vagamente similares ao conceito de interface em Java,
+porque seus métodos podem ser comparados com as funções virtuais do C++.
+Portanto, no Haskell cada instância da classe fornece a sua definição para o
+método.
+  Algumas outras diferenças entre classes do Haskell e do C++:
+  - geralmente em C++ a definição das variáveis e dos métodos acontecem na
+classe, já Haskell separa essas definições;
+  - uma função default do Haskell corresponde a uma definição de uma função
+virtual no C++;
+  - Haskell não suporta a sobrecarga de métodos que C++ suporta;
+  - C++ oferece controle de acesso default através de operadores (e.g. public),
+enquanto que no sistema de classes de Haskell isso não é fornecido.
+
+##### Parte 2                                                              #####
+
+  Um tipo pode ser uma instância de uma classe e herdar o método correspondente
+a cada operação sobre ele. Além disso, as classes podem ser organizadas de
+forma hierárquica, dando a idéia de superclasses e subclasses,que por sua vez
+permitem a transmissão de herança de métodos. No entanto, é bom ressaltar que,
+não se deve confundir tipos com objetos, uma vez que a Haskell não possui a
+noção de objeto ou de alteração de estado, fazendo com que os métodos em
+Haskell sejam mais seguros por ser mais fortemente tipados. Qualquer tentativa
+de aplicar um método a um valor cujo tipo não pertence à classe, será
+detectado pelo compilador. Por outro lado, em Python, isso não acontece, já que
+a sua tipagem é dinâmica. Um exemplo de declaração de tipo e instanciação:
+
+    data Foo = Foo {x :: Integer, str :: String}
+
+    instance Eq Foo where
+      (Foo x1 str1) == (Foo x2 str2) = (x1 == x2) && (str1 == str2)
+
+  A ideia de hierarquia entre classes pode ser feita da seguinte forma:
+
+    class <classe_base> a => <classe_filha> a where
+
+  Um método em Python possui a seguinte sintaxe:
+
+    def show(self, value):
+      print(value)
+
+  Enquanto que em C++ seria assim um método "inline":
+
+    double getVolume(void) {
+      return length * breadth * height;
+    }
+
+  Já em Haskell um método possui a seguinte estrutura:
+
+    x /= y     =  not (x == y)
+
+  As listas e tuplas são os dois tipos de dados algébricos em Haskell, com eles
+pode-se construir todos os outros tipos algébricos. A lista pode ser uma lista
+numérica, uma lista de listas ou uma lista de caracteres. Ela possui dois
+construtores, o "." e o "[]". Por exemplo:
+
+    1:2:[]
+
+  Irá retornar a lista [1,2]. Já as tuplas equivalem a n-upla em português. Elas
+podem ter de dois a infinito elementos, apesar de algumas implementações
+limitarem esse valor máximo em quinze. Seus dois construtores são o "()" e o
+",". Um exemplo de tupla seria:
+
+    (True, 1)
+
+##### Referências                                                          #####
+  - https://en.wikipedia.org/wiki/Polymorphism_(computer_science)
+  - https://www.tutorialspoint.com/java/java_generics.htm
+  - https://softwareengineering.stackexchange.com/questions/335704/how-many-types-of-polymorphism-are-there-in-the-python-language
+  - https://wiki.haskell.org/Polymorphism
+  - https://www.haskell.org/tutorial/classes.html
+  - https://en.wikibooks.org/wiki/Haskell/Classes_and_types
+  - Apostila fornecida pelo professor.
