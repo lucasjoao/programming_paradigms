@@ -1,0 +1,37 @@
+##### Relatório 07 - Módulos                                               #####
+##### Lucas João Martins                                                   #####
+
+##### Parte 1                                                              #####
+
+  A anatomia de um módulo e como os dados podem ser declarados:
+
+    module Nome ( funcExportadaA, funcExportadaB, ... ) where
+
+    -- declaração de dado
+     data NomeDado = abc
+                  |  def
+                  |  ghi
+
+    -- declarações "normais"
+    quadrado s = retangulo s s
+
+    -- declaração de funções
+    funcExportadaA ...
+    funcExportadaB ...
+
+##### Parte 2                                                              #####
+
+  O módulo FuncoesHiperbolicas do arquivo rel07_funcoes_hiperbolicas.hs calcula,
+com uma precisão média, as seguintes operações:
+  - Sinh x
+  - Cosh x
+  - Tanh x
+  - Coth x
+  Onde x é um número real. Por exemplo:
+
+    *FuncoesHiperbolicas> value (Cosh 1)
+    1.5430806
+
+##### Referências                                                          #####
+  - Apostila fornecida pelo professor.
+  - Slides fornecidos pelo professor.
