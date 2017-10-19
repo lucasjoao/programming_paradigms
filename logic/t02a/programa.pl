@@ -102,7 +102,7 @@ searchLast(L) :- true.
 
 % Questao 4
 % Remove todos os pontos ou deslocamentos do ultimo <Id>
-biggerId(Max) :- findall(Id,xy(Id,_,_),L), max_list(L, X).
+biggerId(Max) :- findall(Id,xy(Id,_,_),L), max_list(L, Max).
 removeLast :- biggerId(Max), retractall(xy(Max,_,_)).
 
 % Questao 5
