@@ -93,7 +93,7 @@ searchId(Id,L) :-
 
 % Questao 2
 % Monta lista <L> com pontos iniciais de cada <Id>
-eachId(Id,X,Y) :- xy(Id,X,Y), xy(IdAux,W,Z), Id \= IdAux.
+eachId(Id,X,Y) :- xy(Id,X,Y).
 searchFirst(L) :- setof([X,Y], Id ^ eachId(Id,X,Y), L).
 
 % Questao 3
@@ -102,7 +102,8 @@ searchLast(L) :- true.
 
 % Questao 4
 % Remove todos os pontos ou deslocamentos do ultimo <Id>
-removeLast :- true.
+biggerId(Max) :- findall(Id,xy(Id,_,_),L), max_list(L, X).
+removeLast :- biggerId(Max), retractall(xy(Max,_,_)).
 
 % Questao 5
 % Remove o ultimo ponto ou deslocamento de <Id>
@@ -110,7 +111,7 @@ removeLast(Id) :- true.
 
 % Questao 6
 % Determina um novo <Id> na sequencia numerica existente
-newId(Id) :- true.
+newId(Id) :- biggerId(Max), Id is Max + 1.
 
 % Questao 7
 % Duplica a figura com <Id> a partir de um nova posicao (X,Y)
