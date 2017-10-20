@@ -107,7 +107,11 @@ removeLast :- biggerId(Max), retractall(xy(Max,_,_)).
 
 % Questao 5
 % Remove o ultimo ponto ou deslocamento de <Id>
-removeLast(Id) :- true.
+lastList([Elem], Elem).
+lastList([_|Tail], Elem) :- last(Tail, Elem).
+removeLast(Id) :- findall(xy(Id,X,Y),xy(Id,X,Y),L),
+                  lastList(L,R),
+                  retract(R).
 
 % Questao 6
 % Determina um novo <Id> na sequencia numerica existente
