@@ -89,26 +89,27 @@ svg :-
 % Questao 1 (resolvida)
 % Monta lista <L> com ponto inicial e todos os deslocamentos de <Id>
 searchId(Id,L) :-
-    bagof([X,Y], xy(Id,X,Y), L).
+    bagof([X,Y],xy(Id,X,Y),L).
 
 % Questao 2
 % Monta lista <L> com pontos iniciais de cada <Id>
-eachId(Id,X,Y) :- xy(Id,X,Y).
-searchFirst(L) :- setof([X,Y], Id ^ eachId(Id,X,Y), L).
+searchFirstId(Id,R) :- searchId(Id,L), L = [R|_].
+searchFirst(L) :- bagof(R,Id ^ searchFirstId(Id,R),L).
 
 % Questao 3
 % Monta lista <L> com pontos ou deslocamentos finais de cada <Id>
-searchLast(L) :- true.
+searchLastId(Id,R) :- searchId(Id,L), lastList(L,R).
+searchLast(L) :- bagof(R,Id ^ searchLastId(Id,R),L).
 
 % Questao 4
 % Remove todos os pontos ou deslocamentos do ultimo <Id>
-biggerId(Max) :- findall(Id,xy(Id,_,_),L), max_list(L, Max).
+biggerId(Max) :- findall(Id,xy(Id,_,_),L), max_list(L,Max).
 removeLast :- biggerId(Max), retractall(xy(Max,_,_)).
 
 % Questao 5
 % Remove o ultimo ponto ou deslocamento de <Id>
-lastList([Elem], Elem).
-lastList([_|Tail], Elem) :- last(Tail, Elem).
+lastList([Elem],Elem).
+lastList([_|Tail],Elem) :- last(Tail,Elem).
 removeLast(Id) :- findall(xy(Id,X,Y),xy(Id,X,Y),L),
                   lastList(L,R),
                   retract(R).
@@ -120,4 +121,13 @@ newId(Id) :- biggerId(Max), Id is Max + 1.
 % Questao 7
 % Duplica a figura com <Id> a partir de um nova posicao (X,Y)
 % Deve ser criado um <Id_novo> conforme a sequencia (questao 6)
-cloneId(Id,X,Y) :- true.
+helperCloneId(_,[]).
+helperCloneId(Id,[H|T]) :- [X,Y] = H, assert(xy(Id,X,Y)),
+                           helperCloneId(Id,T), !.
+cloneId(Id,X,Y) :- newId(IdNew), searchId(Id,L),
+                   L = [E|_], [Xnew,Ynew] = E,
+	               Xclone is (X + Xnew),
+	               Yclone is (Y + Ynew),
+	               assert(xy(IdNew,Xclone,Yclone)),
+	               L = [_|Lnew],
+	               helperCloneId(IdNew, Lnew), !.
