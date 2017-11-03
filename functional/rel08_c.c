@@ -1,146 +1,140 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
-#define size(x) (sizeof(x)/sizeof((x)[0])) + 1
+#define tamanho(x) (sizeof(x) / sizeof((x)[0])) + 1
 
-// Part 1: vectors operations
+// gcc rel08_c.c -std=c11 -lm -w (-w nao eh uma boa ideia, rs)
 
-float norm(const float* vector)
-{
-    float sum = 0;
-    int size = size(vector);
-    int i;
-    for (i = 0; i < size; i++) {
-        sum += pow(vector[i], 2);
-    }
-    return sqrt(sum);
+// parte 1, operacoes aritmeticas com vetores
+float norma(float* vetor) {
+  float soma = 0;
+  int tamanho = tamanho(vetor);
+  int i;
+  for (i = 0; i < tamanho; i++) {
+    soma += pow(vetor[i], 2);
+  }
+  return sqrt(soma);
 }
 
-float* scalar_mult_vector(float* vector, const float scalar)
-{
-    int i;
-    int size = size(vector);
-    for (i = 0; i < size; i++) {
-        vector[i] *= scalar;
-    }
-    return vector;
+float* mult_escalar(float* vetor, float escalar) {
+  int i;
+  int tamanho = tamanho(vetor);
+  for (i = 0; i < tamanho; i++) {
+    vetor[i] *= escalar;
+  }
+  return vetor;
 }
 
-float* vector_addition(const float* v1, const float* v2)
-{
-    int i;
-    int size_v1 = size(v1);
-    int size_v2 = size(v2);
-    float result[] = {0, 0};
-    if (size_v1 != size_v2) {
-        return result;
-    }
-    for (i = 0; i < size_v1; i++) {
-        result[i] = v1[i] + v2[i];
-    }
-    return result;
+float* add_vetores(const float* v1, const float* v2) {
+  // implementacao para v1 e v2 no R2
+  int i;
+  int tamanho_v1 = tamanho(v1);
+  float resultado[] = {0, 0};
+  for (i = 0; i < tamanho_v1; i++) {
+    resultado[i] = v1[i] + v2[i];
+  }
+  return resultado;
 }
 
-float dot_product(const float* v1, const float* v2)
-{
-    int i;
-    float dot = 0;
-    int size_v1 = size(v1);
-    int size_v2 = size(v2);
-    if (size_v1 != size_v2) {
-        return 0;
-    }
-    for (i = 0; i < size_v1; i++) {
-        dot += (v1[i] * v2[i]);
-    }
-    return dot;
+float* prod_escalar(float* v1, float* v2) {
+  // implementacao para v1 e v2 no R2
+  int i;
+  int tamanho_v1 = tamanho(v1);
+  float resultado[] = {0, 0};
+  for (i = 0; i < tamanho_v1; i++) {
+    resultado[i] = v1[i] * v2[i];
+  }
+  return resultado;
 }
 
-float* cross_product(const float* v1, const float* v2)
-{
-    int i;
-    int sv1 = size(v1);
-    int sv2 = size(v2);
-    float result[] = {0, 0, 0};
-    if (sv1 != 3 || sv2 != 3) {
-        return result;
+float* prod_vetorial(float* v1, float* v2) {
+  // implementacao para v1 e v2 no espaço R3
+  float result[] = {0, 0, 0};
+  result[0] = (v1[1]*v2[2]) - (v2[1]*v1[2]);
+  result[1] = (v1[0]*v2[2]) + (v2[0]*v1[2]);
+  result[2] = (v1[0]*v2[1]) - (v2[0]*v1[1]);
+  return result;
+}
+
+float angulo_entre_vetores(float* v1, float* v2) {
+  // FIXME - precisa um somatorio pro prod_escalar
+  // return acos(prod_escalar(v1, v2) / (norma(v1) * norma(v2)));
+  return 0;
+}
+
+// parte 2, operacoes com matrizes
+void transposicao(int linha, int coluna, int m[linha][coluna]) {
+  int i, j, aux;
+  for (i = 0; i < linha; i++) {
+    for (j = 0; j < coluna; j++) {
+      if(i != j) {
+        aux = m[i][j];
+        m[i][j] = m[j][i];
+        m[j][i] = aux;
+      }
     }
-        result[0] = (v1[1]*v2[2]) - (v2[1]*v1[2]);
-        result[1] = (v1[0]*v2[2]) + (v2[0]*v1[2]);
-        result[2] = (v1[0]*v2[1]) - (v2[0]*v1[1]);
-    return result;
+  }
 }
 
-float angle_between_vectors(float* v1, float* v2)
-{
-    return acos(dot_product(v1, v2)/(norm(v1) * norm(v2)));
-}
-
-// Part 2: Matrix operations
-
-void transpose(int row, int column, int m[row][column])
-{
-    int i, j, aux;
-    for (i = 0; i < row; i++) {
-        for (j = 0; j < column; j++) {
-            if(i != j) {
-                aux = m[i][j];
-                m[i][j] = m[j][i];
-                m[j][i] = aux;
-            }
-        }
+void mult_escalar_matriz(int linha, int coluna, int m[linha][coluna], int e) {
+  int i, j;
+  for (i = 0; i < linha; i++) {
+    for (j = 0; j < coluna; j++) {
+      m[linha][coluna] *= e;
     }
+  }
 }
 
-void scalar_mult_matrix(int row, int column, int m[row][column], int scalar)
-{
-    int i, j;
-    for (i = 0; i < row; i++) {
-        for (j = 0; j < row; j++) {
-            m[row][column] *= scalar;
-        }
+int** add_matrizes(int linha, int coluna, int m1[linha][coluna],
+                   int m2[linha][coluna]) {
+  int i, j;
+  int resultado[i][j];
+  for (i = 0; i < linha; i++) {
+    for (j = 0; j < coluna; j++) {
+      resultado[i][j] = m1[i][j] + m2[i][j];
     }
+  }
+  return resultado;
 }
 
-int** matrix_addition(int row, int column, int m1[row][column], int m2[row][column])
-{
-    int i, j;
-    int result[i][j];
-    for (i = 0; i < row; i++) {
-        for (j = 0; j < column; j++) {
-            result[i][j] = m1[i][j] + m2[i][j];
-        }
+int** mult_matrizes(int linha, int coluna, int m1[linha][coluna],
+                    int m2[linha][coluna]) {
+  int i, j, k;
+  int mult[linha][coluna];
+  for (i = 0; i < linha; i++) {
+    for (j = 0; j < coluna; j++) {
+      mult[linha][coluna] = 0;
+      for(k = 0; k < coluna; k++) {
+        mult[linha][coluna] += m1[linha][coluna] * m2[coluna][linha];
+      }
     }
-    return result;
+  }
 }
 
-int** matrix_mult(int row, int column, int m1[row][column], int m2[row][column])
-{
-    int i, j, k;
-    int mult[row][column];
-    for (i = 0; i < row; i++) {
-        for (j = 0; j < column; j++) {
-            mult[row][column] = 0;
-            for(k = 0; k < column; k++) {
-                mult[row][column] += m1[row][column] * m2[column][row];
-            }
-        }
-    }
+int determinante(int m[3][3]) {
+  // por sarrus e somente para matriz 3x3
+  int diag =  m[0][0] * m[1][1] * m[2][2] +
+              m[0][2] * m[1][2] * m[2][0] +
+              m[0][2] * m[1][0] * m[2][1];
+
+  int neg =   m[2][0] * m[1][1] * m[0][2] -
+              m[2][1] * m[1][2] * m[0][0] -
+              m[2][2] * m[1][0] * m[0][1];
+
+  return diag - neg;
 }
 
-int sarrus_rule(int m[3][3])
-{
-    int diag =  m[0][0] * m[1][1] * m[2][2] +
-                m[0][2] * m[1][2] * m[2][0] +
-                m[0][2] * m[1][0] * m[2][1];
-
-    int neg =   m[2][0] * m[1][1] * m[0][2] -
-                m[2][1] * m[1][2] * m[0][0] -
-                m[2][2] * m[1][0] * m[0][1];
-
-    return diag - neg;
+int** inversa(int matriz[3][3]) {
+  // Uma matriz quadrada, cujo determinante e diferente de zero e dita
+  // inversıvel e o produto de uma matriz pela sua inversa e a matriz
+  // identidade
+  // 1. Achar a matriz de determinantes menores;
+  // 2. Achar a matriz de cofatores;
+  // 3. Achar a matriz adjunta;
+  // 4. Inversa = 1/det × adjunta.
+  return 0;
 }
 
 int main() {
-    return 0;
+  return 0;
 }
