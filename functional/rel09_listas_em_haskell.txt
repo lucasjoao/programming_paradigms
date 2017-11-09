@@ -1,0 +1,26 @@
+##### Relatório 09 - Listas em Haskell                                     #####
+##### Lucas João Martins                                                   #####
+
+##### Parte 1                                                              #####
+
+  Lazy evaluation (lazyness) ou avaliação preguiçosa é uma técnica onde se
+avalia uma dada expressão apenas quando ela for necessária, pois assim
+evita-se possíveis erros futuros ou computações desnecessárias. Essa técnica
+também acaba sendo útil para a construção de estruturas de dados infinitas,
+pois nelas se aloca espaço até não ter mais memória. Linguagens de programação
+funcional, como Haskell, implementam lazy evaluation por padrão, enquanto em
+outras linguagens é possível aplicar essa técnica.
+
+
+  O módulo Data.List do Haskell fornece uma série de operações úteis para se
+trabalhar com litas, como por exemplo:
+    - concatenar listas;
+    - retornar um elemento na posição especificada;
+    - subtrai duas listas de forma não associativa;
+    - informar quantos elementos únicos existem em uma data lista.
+
+
+##### Referências                                                          #####
+  - Slides fornecidos pelo professor.
+  - https://en.wikipedia.org/wiki/Lazy_evaluation
+
