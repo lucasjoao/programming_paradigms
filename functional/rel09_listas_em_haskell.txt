@@ -10,8 +10,10 @@ também acaba sendo útil para a construção de estruturas de dados infinitas,
 pois nelas se aloca espaço até não ter mais memória. Linguagens de programação
 funcional, como Haskell, implementam lazy evaluation por padrão, enquanto em
 outras linguagens é possível aplicar essa técnica.
-
-
+  Várias linguagens de programação implementam a função map que dada uma função
+retorna uma lista com as respostas se uma lista de operações for mapeada
+para esta função. Funções auxiliares podem ser usadas para complementar o
+mapeamento.
   O módulo Data.List do Haskell fornece uma série de operações úteis para se
 trabalhar com litas, como por exemplo:
     - concatenar listas;
@@ -19,8 +21,13 @@ trabalhar com litas, como por exemplo:
     - subtrai duas listas de forma não associativa;
     - informar quantos elementos únicos existem em uma data lista.
 
+##### Parte 2                                                              #####
+
+  A implementação em Haskell de dois modos de calcular a função de soma e do
+produto dos termos de uma PA de n termos e razão r está no arquivo
+'rel09_parte_2.hs'.
 
 ##### Referências                                                          #####
   - Slides fornecidos pelo professor.
   - https://en.wikipedia.org/wiki/Lazy_evaluation
-
+  - http://learnyouahaskell.com/modules
