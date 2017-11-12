@@ -119,31 +119,41 @@ tartaruga :-
 
 % Questao 2
 % Para frente N passos (conforme angulo atual)
-parafrente(N) :-
-    true.
+parafrente(N) :- angle(Angulo),
+                 X is cos((Angulo * pi) / 180) * N,
+                 Y is sin((Angulo * pi) / 180) * N,
+                 xylast(Id, XVelho, YVelho),
+                 XNovo is XVelho + X, YNovo is YVelho + Y,
+                 retractall(xylast(_, _, _)), asserta(xylast(Id, XNovo, YNovo)),
+                 active(L), (L =:= 1 -> new(Id, X, Y); true).
 
 % Questao 3
 % Para tras N passos (conforme angulo atual)
-paratras(N) :-
-    true.
+paratras(N) :- angle(Angulo),
+               X is cos((Angulo * pi) / 180) * N * (-1),
+               Y is sin((Angulo * pi) / 180) * N * (-1),
+               xylast(Id, XVelho, YVelho),
+               XNovo is XVelho + X, YNovo is YVelho + Y,
+               retractall(xylast(_, _, _)), asserta(xylast(Id, XNovo, YNovo)),
+               active(L), (L =:= 1 -> new(Id, X, Y); true).
 
 % Questao 4
 % Gira a direita G graus
-giradireita(G) :-
-    angle(G).
+giradireita(G) :- angle(AnguloVelho), AnguloNovo is AnguloVelho - G,
+                  retractall(angle(_)), asserta(angle(AnguloNovo)).
 
 % Questao 5
 % Gira a esquerda G graus
-
-% IDEIA EH PEGAR INFO DO BANCO, REMOVER TUDO E SETAR NOVO - IMAGINO QUE SIGA O MESMO NOS OUTROS.
-giraesquerda(G) :- retractall(angle(_)), assertz(angle(-G)).
+giraesquerda(G) :- angle(AnguloVelho), AnguloNovo is AnguloVelho + G,
+                   retractall(angle(_)), asserta(angle(AnguloNovo)).
 
 % Questao 6
 % Use nada (levanta lapis)
-usenada :-
-    active(0).
+usenada :- retractall(active(_)), assertz(active(0)).
 
 % Questao 7
 % Use lapis
-uselapis :-
-    active(1).
+uselapis :- retractall(active(_)), xylast(IdVelho, X, Y),
+            IdNovo is IdVelho + 1, retractall(xylast(_, _, _)),
+            assertz(xylast(IdNovo, X, Y)), assertz(active(1)),
+            new(IdNovo, X, Y).
