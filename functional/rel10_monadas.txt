@@ -1,0 +1,26 @@
+##### Relatório 10 - Mônadas                                               #####
+##### Lucas João Martins                                                   #####
+
+##### Parte 1                                                              #####
+
+  Homologia algébrica envolve definições abstratas utilizadas para o estudo
+desta área. Nela um espaço topológico pode ser definido como um conjunto de
+pontos e seus vizinhos, onde todos devem satisfazer uma série de axiomas. A
+homologia algébrica é a área de matemática que estuda estes espaços em uma visão
+algébrica.
+  Já o Functor, em teoria de categorias, é um tipo de mapeamento entre duas
+categorias que preserva a estrutura. Functor pode ser considerado como um
+homomorfismo de categorias.
+  Por fim, Mônadas, em programação funcional, são estruturas que permitem a
+realização de tarefas numa sequência de passos, como programação imperativa. Um
+functor funciona como um mapeador (map) de quaisquer tipos de variáveis passados como parâmetro.
+
+##### Parte 2                                                              #####
+
+  A vantagem é que o programador não precisa se preocupar com o caso da
+divisão por zero, pois o próprio programa já trata disso conforme especificado
+na função //.
+
+##### Referências                                                          #####
+  - Slides fornecidos pelo professor.
+  - https://en.wikipedia.org/wiki/Homological_algebra
